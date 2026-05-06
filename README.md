@@ -26,8 +26,8 @@ The Power of Lags: Introducing short-term memory (lags 1-14) reduced the Linear 
 Signal vs. Noise: Implementing Winsorization (capping extreme spikes at the 99th percentile) proved essential for preventing model overfitting to anomalous market events.
 Stationarity: The Augmented Dickey-Fuller (ADF) test confirmed the statistical properties of the cleaned series, ensuring the data is suitable for advanced forecasting pipelines.
 Model Selection: While Random Forest is a powerful non-linear tool, the Lag-Enhanced Linear Regression provided the most stable and interpretable results for this specific dataset.
-# Tech StackPython 
-3.10+Pandas / NumPy: Data manipulation and aggregation.
+# Tech Stack
+Python3.10+Pandas / NumPy: Data manipulation and aggregation.
 Statsmodels: SARIMA, Augmented Dickey-Fuller test, DeterministicProcess.
 Scikit-learn: Linear Regression, Random Forest Regressor.
 Plotly / Seaborn: Interactive and static data visualizations.
