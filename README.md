@@ -1,3 +1,38 @@
+## Demand Forecasting: Statistical & ML ApproachTime-Series Analysis for E-commerce 
+Inventory ManagementThis project focuses on forecasting consumer demand over a 14-day horizon. The study implements a range of methodologies, from classical statistical models to modern machine learning algorithms with extensive feature engineering.
+# Project Structure
+1. Exploratory Data Analysis (EDA): Visualization of trends, seasonality, and correlation analysis.
+2. Feature Engineering: Generation of deterministic components (trends, Fourier transforms) and lagged variables (lag 1 to 14).
+3. Model Implementation: Comparative analysis of three distinct approaches:
+   Linear Regression: Baseline and lag-enhanced versions.
+   SARIMA: A classical statistical time-series model.
+   Random Forest: A non-linear machine learning approach.
+4. Quantitative Evaluation: Performance assessment using MAE, RMSE, and MAPE metrics.
+5. Advanced Research: Robustness testing via Winsorization and stationarity verification (ADF Test).
+
+# Quantitative Evaluation (Metrics)
+The following results were obtained during the testing phase for a 14-day forecast horizon:
+
+| Model | MAE | RMSE | MAPE |
+| :--- | :---: | :---: | :---: |
+| **Linear Regression (with Lags)** | **39.54** | **47.69** | **13.26%** |
+| **SARIMA** | 1.02 | 1.07 | 4.05e15 |
+| **Random Forest** | 94.68 | 110.24 | 31.27% |
+
+Note: The extreme MAPE value for SARIMA is a mathematical artifact caused by zero-inflated data points (division by values close to zero). In terms of absolute volume (MAE), SARIMA performed with high precision on sparse data.
+
+# Key Findings
+The Power of Lags: Introducing short-term memory (lags 1-14) reduced the Linear Regression error by approximately 50% (MAE decreased from 78.6 to 39.5), proving that historical demand persistence is a critical predictor.
+Signal vs. Noise: Implementing Winsorization (capping extreme spikes at the 99th percentile) proved essential for preventing model overfitting to anomalous market events.
+Stationarity: The Augmented Dickey-Fuller (ADF) test confirmed the statistical properties of the cleaned series, ensuring the data is suitable for advanced forecasting pipelines.
+Model Selection: While Random Forest is a powerful non-linear tool, the Lag-Enhanced Linear Regression provided the most stable and interpretable results for this specific dataset.
+# Tech StackPython 
+3.10+Pandas / NumPy: Data manipulation and aggregation.
+Statsmodels: SARIMA, Augmented Dickey-Fuller test, DeterministicProcess.
+Scikit-learn: Linear Regression, Random Forest Regressor.
+Plotly / Seaborn: Interactive and static data visualizations.
+
+
 
 The main goal of this block is to implement a demand forecasting system for a short-term period (14 days) 7 days from the last date in the data for all product groups.
 We rely on the transaction data provided to you. It is important to make sure the system can produce a forecast for new products (which have little or no training data). 
