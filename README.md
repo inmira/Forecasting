@@ -1,3 +1,18 @@
+## Project Development and Improvements
+
+The project evolved through several stages. Each iteration focused on improving the forecasting methodology, validation strategy, and robustness of the results.
+
+| Development stage | Limitation or problem identified | Improvement introduced | Why it was needed |
+|---|---|---|---|
+| Initial forecasting approach | The baseline model relied mainly on historical demand patterns and had limited ability to capture changing demand. | Introduced Linear Regression with lagged demand features. | To provide the model with information about recent and past demand and measure the value of historical observations. |
+| Feature engineering | A small set of lag features could not fully represent recurring demand patterns and local fluctuations. | Expanded the feature set with longer lags, rolling statistics, seasonal features, and calendar information. | To capture different temporal patterns and improve the representation of demand dynamics. |
+| Model comparison | A single modelling approach was insufficient to understand which methods were better suited to the data. | Added classical time-series models and machine learning algorithms, including SARIMA, Holt-Winters, Random Forest, Ridge Regression, and LightGBM. | To compare statistical and ML approaches under the same forecasting setup. |
+| Time-based validation | A single train-test split could provide an incomplete picture of model performance. | Introduced rolling-origin backtesting with eight consecutive validation periods. | To evaluate model stability across different points in time and reduce dependence on one validation window. |
+| Data robustness | Demand data contains irregular spikes that may affect model fitting. | Tested Winsorization and compared model performance before and after outlier treatment. | To determine whether limiting extreme values improves forecasting accuracy or removes useful demand information. |
+| Forecast error analysis | Aggregate accuracy alone does not show whether a model systematically overestimates or underestimates demand. | Added WAPE and bias analysis, together with category-level and validation-period comparisons. | To evaluate both forecast error magnitude and systematic prediction errors. |
+| Forecast uncertainty | Point forecasts do not describe the range of possible deviations from actual demand. | Explored prediction intervals based on historical residuals. | To provide additional information about forecast uncertainty. |
+
+The development process focused on evaluating each improvement empirically rather than assuming that more complex models or additional preprocessing would always produce better results.
 ## Demand Forecasting: Statistical & ML ApproachTime-Series Analysis for E-commerce 
 Inventory ManagementThis project focuses on forecasting consumer demand over a 14-day horizon. The study implements a range of methodologies, from classical statistical models to modern machine learning algorithms with extensive feature engineering.
 # Project Structure
@@ -13,13 +28,12 @@ Inventory ManagementThis project focuses on forecasting consumer demand over a 1
 # Quantitative Evaluation (Metrics)
 The following results were obtained during the testing phase for a 14-day forecast horizon:
 
-| Model | MAE | RMSE | MAPE |
-| :--- | :---: | :---: | :---: |
-| **Linear Regression (with Lags)** | **39.54** | **47.69** | **13.26%** |
-| **SARIMA** | 1.02 | 1.07 | 4.05e15 |
-| **Random Forest** | 94.68 | 110.24 | 31.27% |
+| Model | MAE | RMSE | 
+| :--- | :---: | :---: | 
+| **Linear Regression (with Lags)** | **39.54** | **47.69** | 
+| **SARIMA** | 1.02 | 1.07 | 
+| **Random Forest** | 94.68 | 110.24 |
 
-Note: The extreme MAPE value for SARIMA is a mathematical artifact caused by zero-inflated data points (division by values close to zero). In terms of absolute volume (MAE), SARIMA performed with high precision on sparse data.
 
 # Key Findings
 The Power of Lags: Introducing short-term memory (lags 1-14) reduced the Linear Regression error by approximately 50% (MAE decreased from 78.6 to 39.5), proving that historical demand persistence is a critical predictor.
