@@ -13,6 +13,123 @@ The project evolved through several stages. Each iteration focused on improving 
 | Forecast uncertainty | Point forecasts do not describe the range of possible deviations from actual demand. | Explored prediction intervals based on historical residuals. | To provide additional information about forecast uncertainty. |
 
 The development process focused on evaluating each improvement empirically rather than assuming that more complex models or additional preprocessing would always produce better results.
+# Demand Forecasting: Statistical and Machine Learning Approaches
+
+## Time Series Forecasting for E-commerce Inventory Management
+
+### Project Overview
+
+This project explores short-term demand forecasting using the Olist Brazilian E-commerce dataset. The objective is to forecast demand for the next 14 days, starting 7 days after the last date in the training data.
+
+The analysis compares classical time-series methods with machine learning approaches. Particular attention is given to feature engineering, time-based validation, model stability, and the ability to generate forecasts for product categories with limited historical data.
+
+The project focuses on building a forecasting approach that can capture different demand patterns across product categories while remaining robust to sparse observations and irregular demand.
+
+## Project Structure
+
+### 1. Data Preparation
+
+- Loading and inspecting the Olist datasets.
+- Checking duplicates, missing values, and data consistency.
+- Joining order, product, and category information.
+- Translating product categories and handling missing category values.
+- Aggregating order-item records into daily demand time series.
+- Selecting product categories for individual analysis and grouping less frequent categories into an `other` category.
+
+### 2. Exploratory Data Analysis (EDA)
+
+- Analyzing overall demand trends and daily fluctuations.
+- Exploring weekly and seasonal patterns.
+- Examining differences in demand across product categories.
+- Identifying sparse time series and demand spikes.
+- Evaluating the distribution and variability of daily demand.
+
+### 3. Feature Engineering
+
+The machine learning approach uses historical demand and calendar information to represent temporal patterns.
+
+Features include:
+
+- Lagged demand values: 14, 21, 28, 35, 42, and 56 days.
+- Rolling statistics, including means and medians.
+- Seasonal baseline features.
+- Calendar-based features.
+- Cyclical day-of-year representations.
+- Product category information.
+
+Feature engineering is designed to capture short-term demand dynamics, recurring patterns, and differences between product categories.
+
+### 4. Model Implementation
+
+The project compares classical statistical forecasting methods with machine learning models.
+
+**Classical time-series approaches:**
+- Seasonal Naive
+- Seasonal Mean
+- SARIMA
+- Holt-Winters
+
+**Machine learning approaches:**
+- Ridge Regression
+- Random Forest
+- LightGBM
+
+The models are evaluated using the same time-based validation framework to make their results comparable.
+
+### 5. Model Validation and Evaluation
+
+A rolling-origin backtesting strategy is used to evaluate forecasting performance across eight consecutive validation periods.
+
+The main evaluation metrics are:
+
+- **WAPE (Weighted Absolute Percentage Error):** measures total absolute forecast error relative to total actual demand.
+- **Bias:** measures systematic over- or under-forecasting.
+
+Additional analysis examines:
+- Model performance across individual validation periods.
+- Differences in performance between product categories.
+- Forecast stability over time.
+- The contribution of engineered features to model predictions.
+
+### 6. Robustness Analysis
+
+Additional experiments investigate how sensitive model performance is to data characteristics and preprocessing decisions.
+
+These include:
+- Winsorization of extreme demand values.
+- Comparison of model performance before and after outlier treatment.
+- Analysis of prediction errors.
+- Evaluation of prediction intervals based on historical residuals.
+
+## Key Findings
+
+The current experiments show that model performance depends on the forecasting method and the structure of the demand series.
+
+- **LightGBM** achieves the best overall WAPE among the evaluated models.
+- **Random Forest** also provides competitive results.
+- Classical time-series methods remain useful as benchmarks and can perform well for specific demand patterns.
+- Lagged and rolling features provide the machine learning models with information about historical demand and recurring patterns.
+- Model performance varies across validation periods, which highlights the importance of time-based backtesting rather than relying on a single train-test split.
+- Winsorization does not improve every model, so outlier treatment should be evaluated rather than assumed to be beneficial.
+
+## Tech Stack
+
+- **Python** — primary programming language.
+- **Pandas, NumPy** — data processing and numerical operations.
+- **Matplotlib, Seaborn** — data visualization and exploratory analysis.
+- **Statsmodels** — classical time-series modelling and statistical analysis.
+- **Scikit-learn** — preprocessing, regression models, and evaluation.
+- **LightGBM** — gradient boosting for demand forecasting.
+- **Jupyter Notebook** — experimentation and documentation.
+
+## Project Objective
+
+The main objective is to develop and compare statistical and machine learning approaches for short-term e-commerce demand forecasting.
+
+The forecasting setup considers a 14-day prediction horizon beginning 7 days after the final date in the training data. The solution also considers product categories with limited historical observations, for which category-level patterns and shared information can be useful.
+
+The project emphasizes transparent methodology, reproducible validation, and evidence-based model selection.
+
 ## Demand Forecasting: Statistical & ML ApproachTime-Series Analysis for E-commerce 
 Inventory ManagementThis project focuses on forecasting consumer demand over a 14-day horizon. The study implements a range of methodologies, from classical statistical models to modern machine learning algorithms with extensive feature engineering.
 # Project Structure
