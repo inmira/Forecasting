@@ -121,13 +121,11 @@ The current experiments show that model performance depends on the forecasting m
 - **Scikit-learn** — preprocessing, regression models, and evaluation.
 - **LightGBM** — gradient boosting for demand forecasting.
 - **Jupyter Notebook** — experimentation and documentation.
-
+## Multi-Model Demand Forecasting for E-commerce
 ## Project Objective
 
 The main objective is to develop and compare statistical and machine learning approaches for short-term e-commerce demand forecasting.
-
 The forecasting setup considers a 14-day prediction horizon beginning 7 days after the final date in the training data. The solution also considers product categories with limited historical observations, for which category-level patterns and shared information can be useful.
-
 The project emphasizes transparent methodology, reproducible validation, and evidence-based model selection.
 
 ## Demand Forecasting: Statistical & ML ApproachTime-Series Analysis for E-commerce 
